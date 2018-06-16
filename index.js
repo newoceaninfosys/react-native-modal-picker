@@ -94,12 +94,20 @@ export default class ModalPicker extends BaseComponent {
       this.setState({
         modalVisible: false
       });
+
+      if(this.props.onClose) {
+        this.props.onClose();
+      }
     }
 
     open() {
       this.setState({
         modalVisible: true
       });
+
+      if(this.props.onOpen) {
+        this.props.onOpen();
+      }
     }
 
     renderSection(section) {
@@ -131,7 +139,7 @@ export default class ModalPicker extends BaseComponent {
         return (
             <View style={[styles.overlayStyle, this.props.overlayStyle]} key={'modalPicker'+(componentIndex++)}>
                 <View style={styles.optionContainer}>
-                    <ScrollView keyboardShouldPersistTaps>
+                    <ScrollView keyboardShouldPersistTaps={"always"}>
                         <View style={{paddingHorizontal:10}}>
                             {options}
                         </View>
